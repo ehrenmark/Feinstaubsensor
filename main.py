@@ -3,7 +3,7 @@ import csv_reader
 
 if __name__ == "__main__":
     while True:
-        print("1. Herunterladen von aktuellen Daten und importieren dieser in der Datenbank")
+        print("1. Herunterladen von aktuellen Daten und der Import in die Datenbank.")
         print("2. Höchst-, Tiefst- und Durchschnittswerte anzeigen lassen.")
 
         print("9. Beenden")

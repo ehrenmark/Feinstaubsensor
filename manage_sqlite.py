@@ -170,6 +170,8 @@ class Feinstaub_Datenbank:
         self.con.commit()
 
 
+    """Aufgabe 6:"""
+
     def get_daily_data(self):
         while True:
             cur = self.con.cursor()
@@ -182,54 +184,116 @@ class Feinstaub_Datenbank:
                 day = input("Welcher Tag soll ausgegeben werden? Format: YYYY-MM-DD: ")
                 time1 = '''"''' + day + '''T00:00:00"'''
                 time2 = '''"''' + day + '''T23:59:59"'''
-                tuple = (time1, time2, time1, time2, time1, time2)
-                sql_query = """SELECT *, MIN(temperature) FROM DHT22 WHERE messzeitpunkt BETWEEN (%s) AND (%s)
-                            UNION
-                            SELECT *, MAX(temperature) FROM DHT22 WHERE messzeitpunkt BETWEEN (%s) AND (%s)
-                            UNION
-                            SELECT *, AVG(temperature) FROM DHT22 WHERE messzeitpunkt BETWEEN (%s) AND (%s)
-                            ORDER BY (temperature) ASC"""  # sqlite3.OperationalError: near "%": syntax error
-                cur.execute(sql_query, (tuple))            # mache ich im Untericht fertig
-                continue
+                task = input("Möglichkeit:")
+
+                if (task == "1"):
+                    """Möglichkeit1:"""
+                    dic = {'start': time1, 'end': time2}
+                    sql_query = """SELECT MIN(temperature), MAX(temperature), AVG(temperature) FROM DHT22 WHERE messzeitpunkt BETWEEN >= :start AND < :end"""
+                    cur.execute(sql_query, dic)
+                    print(cur.fetchall())
+                    break
+
+                if (task == "2"):
+                    """Möglichkeit2:"""
+                    tuple = (time1, time2)
+                    sql_query = """SELECT MIN(temperature),MAX(temperature),AVG(temperature) FROM DHT22 WHERE messzeitpunkt BETWEEN ? AND ?"""
+                    cur.execute(sql_query, tuple)
+                    print(cur.fetchall())
+                    break
+
+                if (task == "3"):
+                    """Möglichkeit3:"""
+                    tuple = (time1, time2)
+                    sql_query = """SELECT MIN(temperature),MAX(temperature),AVG(temperature) FROM DHT22 WHERE messzeitpunkt BETWEEN (%s) AND (%s)"""
+                    cur.execute(sql_query, tuple)
+                    print(cur.fetchall())
+                    break
+
+                if (task == "4"):
+                    """Ohne Variable Werte"""
+                    sql_query = """SELECT MIN(temperature),MAX(temperature),AVG(temperature) FROM DHT22 WHERE messzeitpunkt BETWEEN "2021-02-21T00:00:00" AND "2021-02-21T23:59:59" """
+                    cur.execute(sql_query)
+                    print(cur.fetchall())
+                    break
+                break
 
             if(task == "2"):
                 day = input("Welcher Tag soll ausgegeben werden? Format: YYYY-MM-DD: ")
                 time1 = '''"''' + day + '''T00:00:00"'''
                 time2 = '''"''' + day + '''T23:59:59"'''
-                tuple = (time1, time2, time1, time2, time1, time2)
-                sql_query = """SELECT *, MIN(humidity) FROM DHT22 WHERE messzeitpunkt BETWEEN (%s) AND (%s)
-                            UNION
-                            SELECT *, MAX(humidity) FROM DHT22 WHERE messzeitpunkt BETWEEN (%s) AND (%s)
-                            UNION
-                            SELECT *, AVG(humidity) FROM DHT22 WHERE messzeitpunkt BETWEEN (%s) AND (%s)
-                            ORDER BY (humidity) ASC"""  # sqlite3.OperationalError: near "%": syntax error
-                cur.execute(sql_query, (tuple))            # mache ich im Untericht fertig
-                continue
+                task = input("Möglichkeit:")
+
+                if (task == "1"):
+                    """Möglichkeit1:"""
+                    dic = {'start': time1, 'end': time2}
+                    sql_query = """SELECT MIN(humidity), MAX(humidity), AVG(humidity) FROM DHT22 WHERE messzeitpunkt BETWEEN >= :start AND < :end"""
+                    cur.execute(sql_query, dic)
+                    print(cur.fetchall())
+                    break
+
+                if (task == "2"):
+                    """Möglichkeit2:"""
+                    tuple = (time1, time2)
+                    sql_query = """SELECT MIN(humidity),MAX(humidity),AVG(humidity) FROM DHT22 WHERE messzeitpunkt BETWEEN ? AND ?"""
+                    cur.execute(sql_query, tuple)
+                    print(cur.fetchall())
+                    break
+
+                if (task == "3"):
+                    """Möglichkeit3:"""
+                    tuple = (time1, time2)
+                    sql_query = """SELECT MIN(humidity),MAX(humidity),AVG(humidity) FROM DHT22 WHERE messzeitpunkt BETWEEN (%s) AND (%s)"""
+                    cur.execute(sql_query, tuple)
+                    print(cur.fetchall())
+                    break
+
+                if (task == "4"):
+                    """Ohne Variable Werte"""
+                    sql_query = """SELECT MIN(humidity),MAX(humidity),AVG(humidity) FROM DHT22 WHERE messzeitpunkt BETWEEN "2021-02-21T00:00:00" AND "2021-02-21T23:59:59" """
+                    cur.execute(sql_query)
+                    print(cur.fetchall())
+                    break
+                break
 
             if(task == "3"):
                 day = input("Welcher Tag soll ausgegeben werden? Format: YYYY-MM-DD: ")
                 time1 = '''"''' + day + '''T00:00:00"'''
                 time2 = '''"''' + day + '''T23:59:59"'''
-                tuple = (time1, time2, time1, time2, time1, time2, time1, time2, time1, time2, time1, time2)
-                sql_query = """SELECT *, MIN(p1) FROM SDS011 WHERE messzeitpunkt BETWEEN (%s) AND (%s)
-                            UNION 
-                            SELECT *, MAX(p1) FROM SDS011 WHERE messzeitpunkt BETWEEN (%s) AND (%s)
-                            UNION 
-                            SELECT *, AVG(p1) FROM SDS011 WHERE messzeitpunkt BETWEEN (%s) AND (%s)
-                            UNION
-                            SELECT *, MIN(p2) FROM SDS011 WHERE messzeitpunkt BETWEEN (%s) AND (%s)
-                            UNION 
-                            SELECT *, MAX(p2) FROM SDS011 WHERE messzeitpunkt BETWEEN (%s) AND (%s)
-                            UNION 
-                            SELECT *, AVG(p2) FROM SDS011 WHERE messzeitpunkt BETWEEN (%s) AND (%s)"""
+                task = input("Möglichkeit:")
 
+                if (task == "1"):
+                    """Möglichkeit1:"""
+                    dic = {'start': time1, 'end': time2}
+                    sql_query = """SELECT MIN(p1), MIN(p2) ,MAX(p1), MAX(p2),AVG(p1), AVG(p2) FROM SDS011  WHERE messzeitpunkt BETWEEN >= :start AND < :end"""
+                    cur.execute(sql_query, dic)
+                    print(cur.fetchall())
+                    break
 
-                # sqlite3.OperationalError: near "%": syntax error
-                cur.execute(sql_query, (tuple))  # mache ich im Untericht fertig
-                continue
+                if (task == "2"):
+                    """Möglichkeit2:"""
+                    tuple = (time1, time2)
+                    sql_query = """SELECT MIN(p1), MIN(p2) ,MAX(p1), MAX(p2),AVG(p1), AVG(p2) FROM SDS011  WHERE messzeitpunkt BETWEEN ? AND ?"""
+                    cur.execute(sql_query, tuple)
+                    print(cur.fetchall())
+                    break
 
-        #sql_query2 = """SELECT *, MIN(p1) FROM SDS011"""
-        #cur.execute(sql_query, (time1, time2))
+                if (task == "3"):
+                    """Möglichkeit3:"""
+                    tuple = (time1, time2)
+                    sql_query = """SELECT MIN(p1), MIN(p2) ,MAX(p1), MAX(p2),AVG(p1), AVG(p2) FROM SDS011  WHERE messzeitpunkt BETWEEN (%s) AND (%s)"""
+                    cur.execute(sql_query, tuple)
+                    print(cur.fetchall())
+                    break
+
+                if (task == "4"):
+                    """Ohne Variable Werte"""
+                    sql_query = """SELECT MIN(p1), MIN(p2) ,MAX(p1), MAX(p2),AVG(p1), AVG(p2) FROM SDS011  WHERE messzeitpunkt BETWEEN "2021-02-21T00:00:00" AND "2021-02-21T23:59:59" """
+                    cur.execute(sql_query)
+                    print(cur.fetchall())
+                    break
+                break
+
     
     def close(self):
         self.con.close()
